@@ -26,14 +26,6 @@ Escribo sobre lo que me mantiene despierto (o me ayuda a dormir):
 
 ---
 
-### 🛠️ El Stack (Inmortalidad Digital)
-Este sitio es un experimento de estabilidad ad-eternum:
-*   **Engine:** Static Site Generation (SSG) para velocidad máxima.
-*   **Hosting:** GitHub Pages (0% downtime, 100% control).
-*   **Dominio:** [helloworld.com.ar](https://helloworld.com.ar)
-
----
-
 ### 📬 Conectemos
 ¿Interesado en IA, arquitectura de software o por qué un reloj Victorinox automático es una obra de arte?
 *   **Web:** [helloworld.com.ar](https://helloworld.com.ar)
