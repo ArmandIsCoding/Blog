@@ -1,0 +1,15 @@
+# Información del sitio
+title: helloworld.com.ar
+author: Armando Andrés Meabe
+description: Blog sobre tecnología, programación e IA.
+email: armando.meabe@gmail.com
+
+# Configuración del Tema
+remote_theme: pages-themes/architect
+
+# Redes Sociales
+github_username: ArmandIsCoding
+linkedin_username: armandomeabe
+
+# Personalización adicional
+footer_text: "Todo sistema tiende a la entropía; documentar es nuestra única forma de resistencia."
