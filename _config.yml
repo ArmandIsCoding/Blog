@@ -1,15 +1,18 @@
-# Información del sitio
+# Información básica
 title: helloworld.com.ar
 author: Armando Andrés Meabe
 description: Blog sobre tecnología, programación e IA.
-email: armando.meabe@gmail.com
 
-# Configuración del Tema
-remote_theme: pages-themes/architect
+# Tema remoto (Cayman)
+remote_theme: pages-themes/cayman@v0.2.0
 
-# Redes Sociales
+# Plugins necesarios para que GitHub acepte temas externos
+plugins:
+  - jekyll-remote-theme
+
+# Configuración específica de Cayman
+show_downloads: false # Seteado en false para que no aparezcan botones de "Download ZIP"
+
+# Redes y enlaces
 github_username: ArmandIsCoding
 linkedin_username: armandomeabe
-
-# Personalización adicional
-footer_text: "Todo sistema tiende a la entropía; documentar es nuestra única forma de resistencia."
