@@ -11,25 +11,24 @@ title: Home
   <img src="armand.jpg" alt="Armando Andrés Meabe" style="border-radius: 50%; max-width: 200px;">
 </p>
 
-Este es el repositorio central de mi blog personal. Un espacio para documentar mi camino, compartir experimentos de ingeniería y reflexionar sobre la intersección entre el software y la inteligencia artificial.
+---
+
+### 🚀 Proyectos en Desarrollo (Featured)
+
+#### 🤖 [NoPilot](https://github.com/ArmandIsCoding/NoPilot/blob/main/README.md)
+*Local AI Orchestration & Agentic Workflows.*  
+Un experimento para ejecutar flujos de IA locales sin dependencia de la nube, optimizando la privacidad y latencia. Es parte de mi investigación sobre modelos locales y desarrollo asistido.
+
+#### 💸 [Vaquita](https://github.com/ArmandIsCoding/vaquita)
+*iOS Application.*  
+Desarrollo nativo para iOS enfocado en la gestión colaborativa de gastos, aprovechando el ecosistema de Apple.
+
+#### 📜 [PsNext](https://github.com/ArmandIsCoding/PsNext)
+*Modern PSeInt Interpreter.*  
+Re-versión de la herramienta PSeInt, integrando pseudocódigo con una vista gráfica lateral para mejorar la enseñanza de la lógica de programación de forma moderna.
 
 ---
 
-### 👨‍💻 Perfil Profesional
-**AI Architect & Tech Leader**
-*LLMs & Agentic Workflows • Expert in C++ & .NET • 18+ years in Microsoft Ecosystem • Former Microsoft Academic R&D • Researcher & Speaker*
-
-### 📝 ¿Qué vas a encontrar acá?
-Escribo sobre lo que me mantiene despierto (o me ayuda a dormir):
-*   **🤖 Inteligencia Artificial:** De la teoría a la práctica. Agentic workflows, modelos locales y el futuro del desarrollo asistido.
-*   **🏗️ Arquitectura & Cloud:** Construyendo sistemas resilientes en Azure y .NET que no se rompan a las 3 AM.
-*   **🔥 Hardware & Performance:** Crónicas sobre cómo domar procesadores i9, optimizar hardware de Apple y la eterna búsqueda de la refrigeración perfecta.
-*   **📸 Realidad Documental:** Fotografía de calle y documental; capturando fragmentos de la realidad social con equipos discretos.
-*   **⏳ Horología:** La ingeniería del tiempo. Coleccionismo y modificación de relojes mecánicos.
-
----
-
-### 📬 Conectemos
-¿Interesado en IA, arquitectura de software o por qué un reloj automático es una obra de arte?
-*   **LinkedIn:** [in/armandomeabe](https://www.linkedin.com/in/armandomeabe/)
-*   **Gravatar:** [armandomeabe](https://gravatar.com/armandomeabe)
+### 📬 Let's talk
+* **LinkedIn:** [in/armandomeabe](https://www.linkedin.com/in/armandomeabe/)
+* **Gravatar:** [armandomeabe](https://gravatar.com/armandomeabe)
