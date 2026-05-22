@@ -12,19 +12,12 @@ title: Home
 
 ---
 
-### 🚀 Proyectos en Desarrollo (Featured)
+### 🚀 Repositorios públicos
 
-#### 🤖 [NoPilot](https://github.com/ArmandIsCoding/NoPilot/blob/main/README.md)
-*Local AI Orchestration & Agentic Workflows.*  
-Un experimento para ejecutar flujos de IA locales sin dependencia de la nube, optimizando la privacidad y latencia. Es parte de mi investigación sobre modelos locales y desarrollo asistido.
-
-#### 💸 [Vaquita](https://github.com/ArmandIsCoding/vaquita)
-*iOS Application.*  
-Desarrollo nativo para iOS enfocado en la gestión colaborativa de gastos, aprovechando el ecosistema de Apple.
-
-#### 📜 [PsNext](https://github.com/ArmandIsCoding/PsNext)
-*Modern PSeInt Interpreter.*  
-Re-versión de la herramienta PSeInt, integrando pseudocódigo con una vista gráfica lateral para mejorar la enseñanza de la lógica de programación de forma moderna.
+{% for repo in site.github.public_repositories %}{% unless repo.fork %}
+#### [{{ repo.name }}]({{ repo.html_url }}/blob/{{ repo.default_branch }}/README.md)
+{% if repo.description %}*{{ repo.description }}*{% endif %}
+{% endunless %}{% endfor %}
 
 ---
 
