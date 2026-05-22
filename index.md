@@ -8,7 +8,7 @@ title: Home
 > **"Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido."**
 
 <p align="center">
-  <img src="armand.jpg" alt="Armando Andrés Meabe" style="border-radius: 50%; max-width: 200px;">
+  <img src="/assets/armand.jpg" alt="Armando Andrés Meabe" style="border-radius: 50%; max-width: 200px;">
 </p>
 
 ---
