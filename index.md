@@ -3,16 +3,6 @@ layout: default
 title: Home
 ---
 
-# 🌐 helloworld.com.ar | Armando Andrés Meabe
-
-> **"Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido."**
-
-<p align="center">
-  <img src="/assets/armand.jpg" alt="Armando Andrés Meabe" style="border-radius: 50%; max-width: 200px;">
-</p>
-
----
-
 ### 🚀 Últimos posts
 
 {% for post in site.posts %}

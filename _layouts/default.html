@@ -15,14 +15,16 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name">🌐 helloworld.com.ar | Armando Andrés Meabe</h1>
-      <h2 class="project-tagline">"Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido."</h2>
-      
-      <a href="https://github.com/{{ site.github_username }}" class="btn" target="_blank">View on GitHub</a>
-      
-      <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}/" class="btn" target="_blank">Conectemos en LinkedIn</a>
-      
-      <a href="{{ '/assets/cv-armando-meabe.pdf' | relative_url }}" class="btn" download>¿Trabajamos juntos? Descargá mi CV</a>
+      <div style="display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; max-width:960px; margin:0 auto; width:100%;">
+        <img src="/assets/armand.jpg" alt="Armando Andrés Meabe" style="border-radius:50%; width:130px; height:130px; object-fit:cover; flex-shrink:0; border:3px solid rgba(255,255,255,0.35);">
+        <div>
+          <h1 class="project-name">🌐 helloworld.com.ar | Armando Andrés Meabe</h1>
+          <h2 class="project-tagline">"Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido."</h2>
+          <a href="https://github.com/{{ site.github_username }}" class="btn" target="_blank">View on GitHub</a>
+          <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}/" class="btn" target="_blank">Conectemos en LinkedIn</a>
+          <a href="{{ '/assets/cv-armando-meabe.pdf' | relative_url }}" class="btn" download>¿Trabajamos juntos? Descargá mi CV</a>
+        </div>
+      </div>
     </header>
 
     <main id="content" class="main-content" role="main">
