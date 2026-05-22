@@ -13,7 +13,7 @@ title: Home
 
 ---
 
-### � Últimos posts
+### 🚀 Últimos posts
 
 {% for post in site.posts %}
 #### [{{ post.title }}]({{ post.url | relative_url }})
@@ -22,7 +22,7 @@ title: Home
 
 ---
 
-### �🚀 Proyectos en Desarrollo (Featured)
+### 🚀 Proyectos en Desarrollo (Featured)
 
 #### 🤖 [NoPilot](https://github.com/ArmandIsCoding/NoPilot/blob/main/README.md)
 *Local AI Orchestration & Agentic Workflows.*  
