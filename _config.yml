@@ -9,6 +9,7 @@ remote_theme: pages-themes/cayman@v0.2.0
 # Plugins necesarios para que GitHub acepte temas externos
 plugins:
   - jekyll-remote-theme
+  - jekyll-feed
 
 # Configuración específica de Cayman
 show_downloads: false # Seteado en false para que no aparezcan botones de "Download ZIP"

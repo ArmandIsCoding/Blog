@@ -5,7 +5,7 @@ title: Home
 
 # 🌐 helloworld.com.ar | Armando Andrés Meabe
 
-> **"Todo sistema tiende a la entropía; documentar es nuestra forma de rebeldía frente al olvido."**
+> **"Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido."**
 
 <p align="center">
   <img src="armand.jpg" alt="Armando Andrés Meabe" style="border-radius: 50%; max-width: 200px;">
@@ -13,7 +13,16 @@ title: Home
 
 ---
 
-### 🚀 Proyectos en Desarrollo (Featured)
+### � Últimos posts
+
+{% for post in site.posts %}
+#### [{{ post.title }}]({{ post.url | relative_url }})
+*{{ post.date | date: "%d/%m/%Y" }}* — {{ post.description }}
+{% endfor %}
+
+---
+
+### �🚀 Proyectos en Desarrollo (Featured)
 
 #### 🤖 [NoPilot](https://github.com/ArmandIsCoding/NoPilot/blob/main/README.md)
 *Local AI Orchestration & Agentic Workflows.*  
