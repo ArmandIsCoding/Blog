@@ -23,7 +23,7 @@ La premisa es simple pero poderosa: **la palabra clave `unsafe` dejará de ser u
 
 Desde la primera versión de C#, agregar `unsafe` a un método o tipo establecía un "contexto inseguro". Esto nos daba superpoderes: declarar punteros, desreferenciarlos y manipular la memoria directamente.
 
-El problema es que este modelo operaba casi enteramente por *convención*. Mira este ejemplo conceptual de cómo funciona hoy:
+El problema es que este modelo operaba casi enteramente por *convención*. Mirá este ejemplo conceptual de cómo funciona hoy:
 
 ```csharp
 // Modelo actual (C# 1.0)
@@ -80,7 +80,7 @@ public static unsafe byte ReadByte(IntPtr ptr, int ofs)
 
 **¿Qué está pasando aquí?**
 
-* Fíjate en la etiqueta **`/// <safety>`**. Este es el contrato formal. Los analizadores de código te marcarán un error si haces un método `unsafe` y olvidas este comentario.
+* Fijate en la etiqueta **`/// <safety>`**. Este es el contrato formal. Los analizadores de código te marcarán un error si haces un método `unsafe` y olvidas este comentario.
 * El comentario interno **`// SAFETY:`** es una nota para el revisor del código, indicando qué suposiciones se están haciendo.
 * La desreferencia real (`addr[ofs]`) está aislada dentro del bloque `unsafe { }`. El compilador de C# 16 no te dejará hacerlo sin ese bloque.
 * La firma tiene `unsafe`. Esto **propaga** la obligación: quien llame a `ReadByte` ahora está obligado a usar también un bloque `unsafe { }` en su código.
@@ -128,7 +128,7 @@ C# 16 introduce algo sumamente interesante para arquitecturas complejas: **aplic
 
 A veces, el peligro no está en llamar a una API del sistema operativo, sino en la diferencia entre "lo que el sistema de tipos de C# puede ver" y "lo que tu clase promete mantener".
 
-Imagina que creas un `NativeBuffer` que maneja memoria externa:
+Imaginá que creás un `NativeBuffer` que maneja memoria externa:
 
 ```csharp
 public sealed class NativeBuffer : IDisposable
