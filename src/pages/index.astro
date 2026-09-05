@@ -17,6 +17,17 @@ const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
       <blockquote class="home-motto">
         <i>“Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido.”</i>
       </blockquote>
+
+      <div class="home-contact" aria-label="Contacto">
+        <nav aria-label="Perfiles de Armando">
+          <a href="https://github.com/ArmandIsCoding" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/armandomeabe/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://gravatar.com/armandomeabe" target="_blank" rel="noopener noreferrer">Gravatar</a>
+        </nav>
+        <a class="home-contact__cv" href="/assets/cv-armando-meabe.pdf" download>
+          ¿Trabajamos juntos? <strong>Descargá mi CV →</strong>
+        </a>
+      </div>
     </div>
     <img
       class="home-portrait"
