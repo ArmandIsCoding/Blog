@@ -145,6 +145,14 @@ time,
   padding: 2.6rem clamp(1rem, 5vw, 3rem) 4rem;
 }
 
+.home-lede {
+  align-items: center;
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr) 8rem;
+  margin-bottom: 2.8rem;
+}
+
 .home-intro {
   font-size: clamp(1.2rem, 3vw, 1.55rem);
   line-height: 1.48;
@@ -156,9 +164,18 @@ time,
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
-  margin: 2rem auto 2.8rem;
+  margin: 2rem auto 0;
   max-width: 40rem;
   text-align: center;
+}
+
+.home-portrait {
+  aspect-ratio: 1;
+  border: 1px solid var(--rule);
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
 }
 
 .section-heading {
@@ -443,6 +460,15 @@ time,
     align-items: flex-start;
     flex-direction: column;
     gap: 0.7rem;
+  }
+
+  .home-lede {
+    grid-template-columns: 1fr;
+  }
+
+  .home-portrait {
+    grid-row: 1;
+    width: 7rem;
   }
 
   .post-list__item {
