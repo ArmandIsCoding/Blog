@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { isVisiblePost, sortPosts } from '../lib/posts';
+
+const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
+---
+
+<BaseLayout description="Notas sobre software, desarrollo, arquitectura, inteligencia artificial y otros experimentos técnicos.">
+  <p class="home-intro">
+    Notas sobre software, desarrollo y las cosas que aprendí construyendo sistemas que parecían simples.
+  </p>
+
+  <section aria-labelledby="ultimos-articulos">
+    <h1 id="ultimos-articulos" class="section-heading">Últimos artículos</h1>
+    <PostList posts={posts.slice(0, 12)} />
+    {posts.length > 12 && (
+      <p class="section-footer"><a href="/archivo/">Ver el archivo completo →</a></p>
+    )}
+  </section>
+</BaseLayout>

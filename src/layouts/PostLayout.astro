@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import type { Post } from '../lib/posts';
+import {
+  estimateReadingMinutes,
+  formatPostDate,
+  getPostUrl,
+  isVisiblePost,
+  slugifyTag,
+  sortPosts,
+} from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
+const currentIndex = posts.findIndex((entry) => entry.id === post.id);
+const newerPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
+const olderPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
+const canonicalPath = getPostUrl(post);
+const image = post.data.cover?.src;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedAt.toISOString(),
+  ...(post.data.updatedAt && { dateModified: post.data.updatedAt.toISOString() }),
+  mainEntityOfPage: new URL(canonicalPath, Astro.site).toString(),
+  ...(image && { image: new URL(image, Astro.site).toString() }),
+  author: {
+    '@type': 'Person',
+    name: 'Armando Andrés Meabe',
+    url: new URL('/acerca/', Astro.site).toString(),
+  },
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  canonicalPath={canonicalPath}
+  image={image}
+  type="article"
+  noindex={post.data.draft}
+  jsonLd={jsonLd}
+>
+  <article class="article">
+    <header class="article__header">
+      {post.data.draft && <span class="draft-label">Draft: no se publicará</span>}
+      <h1>{post.data.title}</h1>
+      <p class="article__description">{post.data.description}</p>
+      <div class="article__meta">
+        <time datetime={post.data.publishedAt.toISOString()}>
+          Publicado el {formatPostDate(post.data.publishedAt)}
+        </time>
+        {post.data.updatedAt && (
+          <time datetime={post.data.updatedAt.toISOString()}>
+            Actualizado el {formatPostDate(post.data.updatedAt)}
+          </time>
+        )}
+        <span>{estimateReadingMinutes(post.body)} min de lectura</span>
+      </div>
+      <div class="tag-list" aria-label="Temas del artículo">
+        {post.data.tags.map((tag) => (
+          <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
+        ))}
+      </div>
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    <nav class="post-navigation" aria-label="Artículos relacionados por fecha">
+      <div>
+        {newerPost && (
+          <>
+            <span>Más reciente</span>
+            <a href={getPostUrl(newerPost)}>← {newerPost.data.title}</a>
+          </>
+        )}
+      </div>
+      <div>
+        {olderPost && (
+          <>
+            <span>Anterior</span>
+            <a href={getPostUrl(olderPost)}>{olderPost.data.title} →</a>
+          </>
+        )}
+      </div>
+    </nav>
+  </article>
+</BaseLayout>

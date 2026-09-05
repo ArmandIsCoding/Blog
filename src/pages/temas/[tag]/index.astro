@@ -1,0 +1,36 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import PageLayout from '../../../layouts/PageLayout.astro';
+import PostList from '../../../components/PostList.astro';
+import type { Post } from '../../../lib/posts';
+import { isVisiblePost, slugifyTag, sortPosts } from '../../../lib/posts';
+
+interface Props {
+  tag: string;
+  posts: Post[];
+}
+
+export const getStaticPaths = (async () => {
+  const posts = (await getCollection('posts')).filter(isVisiblePost);
+  const tags = new Map<string, string>();
+
+  for (const post of posts) {
+    for (const tag of post.data.tags) tags.set(slugifyTag(tag), tag);
+  }
+
+  return [...tags.entries()].map(([slug, tag]) => ({
+    params: { tag: slug },
+    props: {
+      tag,
+      posts: sortPosts(posts.filter((post) => post.data.tags.includes(tag))),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
+---
+
+<PageLayout title={tag} description={`Artículos relacionados con ${tag}.`}>
+  <PostList posts={posts} />
+</PageLayout>

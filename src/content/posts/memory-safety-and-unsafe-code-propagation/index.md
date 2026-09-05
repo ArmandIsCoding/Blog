@@ -1,13 +1,14 @@
 ---
-layout: default
 title: "Anatomía del nuevo modelo de memoria en C# 16: Contratos, Guardias y Código Inseguro"
-date: 2026-05-26
 description: "El equipo de .NET está rediseñando desde cero cómo funciona `unsafe` en C# 16. Analizamos los cuatro pilares del nuevo modelo: propagación, supresión, documentación de seguridad y guardias, con código real."
+publishedAt: 2026-05-26
+tags:
+  - csharp
+  - dotnet
+  - seguridad
+draft: false
+cover: ./evolucion-seguridad-de-memoria.webp
 ---
-
-[← Volver al inicio](https://helloworld.com.ar)
-
-# Anatomía del nuevo modelo de memoria en C# 16: Contratos, Guardias y Código Inseguro
 
 Hace poco charlamos superficialmente sobre los cambios que se vienen en la seguridad de memoria de C#, pero hoy vamos a ensuciarnos las manos. El equipo de .NET está preparando para C# 16 (con vistas previas desde .NET 11 y versión final en .NET 12) una revolución total inspirada fuertemente en Rust y Swift.
 
@@ -15,7 +16,7 @@ La premisa es simple pero poderosa: **la palabra clave `unsafe` dejará de ser u
 
 ¿Por qué es esto necesario y cómo se ve en el código? Vamos a desarmarlo paso a paso.
 
-![Infografía: Evolución en seguridad de memoria en C#](/assets/Evolución_en_seguridad_de_memoria.png)
+![Infografía: evolución en seguridad de memoria en C#](./evolucion-seguridad-de-memoria.webp)
 
 ---
 

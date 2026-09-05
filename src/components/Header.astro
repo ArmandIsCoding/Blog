@@ -1,0 +1,33 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/archivo/', label: 'Archivo' },
+  { href: '/temas/', label: 'Temas' },
+  { href: '/proyectos/', label: 'Proyectos' },
+  { href: '/acerca/', label: 'Acerca' },
+  { href: '/feed.xml', label: 'RSS' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/" aria-label="helloworld.com.ar, inicio">
+      hello, world<span aria-hidden="true">_</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul class="site-nav">
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

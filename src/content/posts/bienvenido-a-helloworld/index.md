@@ -1,11 +1,12 @@
 ---
-layout: default
 title: "Bienvenido a helloworld.com.ar"
-date: 2026-05-21
 description: "Por qué empecé este blog técnico y qué vas a encontrar acá."
+publishedAt: 2026-05-21
+tags:
+  - meta
+  - desarrollo
+draft: false
 ---
-
-# Bienvenido a helloworld.com.ar
 
 > *"Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido."*
 
@@ -50,4 +51,4 @@ Toda la documentación de este blog está viva. No solo escribo palabras, escrib
 
 ---
 
-*Si algo de lo que leés acá te resuena, te genera dudas o querés debatir sobre si un reloj mecánico es o no la cumbre de la ingeniería humana, encontrás mis canales de contacto en la home. ¡Bienvenidos al viaje!*
+*Si algo de lo que leés acá te resuena, te genera dudas o querés debatir sobre si un reloj mecánico es o no la cumbre de la ingeniería humana, encontrás mis canales de contacto en la página Acerca. ¡Bienvenidos al viaje!*

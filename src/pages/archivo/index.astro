@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { isVisiblePost, sortPosts } from '../../lib/posts';
+
+const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
+---
+
+<PageLayout title="Archivo" description="Todos los artículos, del más reciente al más antiguo.">
+  <PostList posts={posts} />
+</PageLayout>

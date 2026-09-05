@@ -1,0 +1,69 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description: string;
+  canonicalPath?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  image = '/social/default-og.png',
+  type = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const siteName = 'helloworld.com.ar';
+const pageTitle = title ? `${title} — ${siteName}` : siteName;
+const canonical = new URL(canonicalPath, Astro.site);
+const socialImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title={siteName} href="/feed.xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    {jsonLd && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    )}
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido" class="page-shell">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

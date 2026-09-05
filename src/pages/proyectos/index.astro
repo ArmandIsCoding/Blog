@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const projects = (await getCollection('projects')).sort((left, right) => left.data.order - right.data.order);
+---
+
+<PageLayout
+  title="Proyectos"
+  description="Una selección deliberada de proyectos y experimentos; no un espejo automático de GitHub."
+>
+  <ol class="project-list">
+    {projects.map((project) => (
+      <li class="project">
+        <h2><a href={project.data.repository}>{project.data.name}</a></h2>
+        <p>{project.data.summary}</p>
+        <div class="project__meta">
+          <span>{project.data.status}</span>
+          <a href={project.data.repository}>Ver repositorio →</a>
+        </div>
+      </li>
+    ))}
+  </ol>
+</PageLayout>
