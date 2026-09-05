@@ -9,9 +9,15 @@ const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
 
 <BaseLayout description="Notas sobre software, desarrollo, arquitectura, inteligencia artificial y otros experimentos técnicos.">
   <div class="home-lede">
-    <p class="home-intro">
-      Notas sobre software, desarrollo y las cosas que aprendí construyendo sistemas que parecían simples.
-    </p>
+    <div class="home-copy">
+      <p class="home-intro">
+        Notas sobre software, desarrollo y las cosas que aprendí construyendo sistemas que parecían simples.
+      </p>
+
+      <blockquote class="home-motto">
+        <i>“Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido.”</i>
+      </blockquote>
+    </div>
 
     <aside class="identity-badge" aria-label="Credencial de Armando Andrés Meabe">
       <span class="identity-badge__slot" aria-hidden="true"></span>
@@ -32,10 +38,6 @@ const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
         <span>HW-001</span>
       </div>
     </aside>
-
-    <blockquote class="home-motto">
-      <i>“Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido.”</i>
-    </blockquote>
 
     <div class="home-contact" aria-label="Contacto">
       <nav aria-label="Perfiles de Armando">

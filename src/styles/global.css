@@ -150,17 +150,21 @@ time,
   display: grid;
   column-gap: clamp(2rem, 7vw, 5rem);
   grid-template-areas:
-    'intro badge'
-    'motto motto'
+    'copy badge'
     'contact contact';
   grid-template-columns: minmax(0, 1fr) 10.5rem;
   margin-bottom: 2.8rem;
-  row-gap: 1.7rem;
+  row-gap: 1.25rem;
+}
+
+.home-copy {
+  display: grid;
+  gap: 1.35rem;
+  grid-area: copy;
 }
 
 .home-intro {
   font-size: clamp(1.2rem, 3vw, 1.55rem);
-  grid-area: intro;
   line-height: 1.48;
   margin: 0;
   max-width: 46rem;
@@ -169,10 +173,9 @@ time,
 .home-motto {
   color: var(--muted);
   font-size: 0.95rem;
-  grid-area: motto;
   line-height: 1.6;
   margin: 0 auto;
-  max-width: 46rem;
+  max-width: 40rem;
   text-align: center;
 }
 
@@ -609,8 +612,7 @@ time,
   .home-lede {
     grid-template-areas:
       'badge'
-      'intro'
-      'motto'
+      'copy'
       'contact';
     grid-template-columns: 1fr;
   }
