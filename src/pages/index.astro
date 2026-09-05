@@ -34,4 +34,20 @@ const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
       <p class="section-footer"><a href="/archivo/">Ver el archivo completo →</a></p>
     )}
   </section>
+
+  <aside class="contact-note" aria-labelledby="hablemos">
+    <div>
+      <h2 id="hablemos">Hablemos</h2>
+      <p>
+        Podés encontrarme en
+        <a href="https://github.com/ArmandIsCoding" target="_blank" rel="noopener noreferrer">GitHub</a>,
+        <a href="https://www.linkedin.com/in/armandomeabe/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        y <a href="https://gravatar.com/armandomeabe" target="_blank" rel="noopener noreferrer">Gravatar</a>.
+      </p>
+    </div>
+    <a class="contact-note__cv" href="/assets/cv-armando-meabe.pdf" download>
+      ¿Trabajamos juntos?<br />
+      <strong>Descargá mi CV →</strong>
+    </a>
+  </aside>
 </BaseLayout>
