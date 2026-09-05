@@ -618,7 +618,7 @@ time,
   }
 
   .identity-badge {
-    justify-self: start;
+    justify-self: center;
     transform: rotate(-1deg);
     width: 9.5rem;
   }
