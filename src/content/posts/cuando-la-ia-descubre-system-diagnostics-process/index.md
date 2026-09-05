@@ -1,6 +1,6 @@
 ---
-title: "Cuando la IA descubre Process: automatización local con .NET 11"
-description: "Las nuevas APIs de System.Diagnostics.Process en .NET 11 simplifican ejecutar herramientas, capturar su salida y conectarlas con IA. Una combinación polenta, siempre que no le entreguemos las llaves del servidor al modelo."
+title: "Cuando la IA descubre Process: automatización local con .NET 11 y un poco de sentido común* (*opcional)"
+description: "Las nuevas APIs de System.Diagnostics.Process en .NET 11 simplifican ejecutar herramientas, capturar su salida y conectarlas con IA. Una combinación polenta, siempre que no le entreguemos las llaves del servidor al modelo **. (** también opcional)"
 publishedAt: 2026-09-05
 tags:
   - dotnet
