@@ -148,24 +148,31 @@ time,
 .home-lede {
   align-items: center;
   display: grid;
-  gap: clamp(1.5rem, 5vw, 3.5rem);
-  grid-template-columns: minmax(0, 1fr) 8rem;
+  column-gap: clamp(2rem, 7vw, 5rem);
+  grid-template-areas:
+    'intro badge'
+    'motto motto'
+    'contact contact';
+  grid-template-columns: minmax(0, 1fr) 10.5rem;
   margin-bottom: 2.8rem;
+  row-gap: 1.7rem;
 }
 
 .home-intro {
   font-size: clamp(1.2rem, 3vw, 1.55rem);
+  grid-area: intro;
   line-height: 1.48;
   margin: 0;
-  max-width: 42rem;
+  max-width: 46rem;
 }
 
 .home-motto {
   color: var(--muted);
   font-size: 0.95rem;
+  grid-area: motto;
   line-height: 1.6;
-  margin: 2rem auto 0;
-  max-width: 40rem;
+  margin: 0 auto;
+  max-width: 46rem;
   text-align: center;
 }
 
@@ -177,8 +184,8 @@ time,
   font-family: var(--mono);
   font-size: 0.68rem;
   gap: 0.65rem 1.5rem;
+  grid-area: contact;
   justify-content: space-between;
-  margin-top: 1.6rem;
   padding-top: 0.7rem;
 }
 
@@ -204,13 +211,71 @@ time,
   text-decoration-thickness: 2px;
 }
 
-.home-portrait {
+.identity-badge {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  box-shadow: 0.35rem 0.4rem 0 var(--rule);
+  color: var(--ink);
+  display: block;
+  font-family: var(--mono);
+  grid-area: badge;
+  justify-self: end;
+  padding: 0.55rem;
+  transform: rotate(1.25deg);
+  width: 10.5rem;
+}
+
+.identity-badge__slot {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  display: block;
+  height: 0.34rem;
+  margin: 0 auto 0.55rem;
+  width: 2.65rem;
+}
+
+.identity-badge__site {
+  display: block;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.identity-badge__photo {
   aspect-ratio: 1;
   border: 1px solid var(--rule);
-  display: block;
   height: auto;
   object-fit: cover;
   width: 100%;
+}
+
+.identity-badge__name {
+  display: grid;
+  gap: 0.16rem;
+  line-height: 1.25;
+  padding: 0.5rem 0.1rem 0.55rem;
+}
+
+.identity-badge__name strong {
+  font-family: var(--serif);
+  font-size: 0.77rem;
+  font-weight: 600;
+}
+
+.identity-badge__name span,
+.identity-badge__meta {
+  color: var(--muted);
+  font-size: 0.43rem;
+  letter-spacing: 0.03em;
+}
+
+.identity-badge__meta {
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0.1rem 0;
 }
 
 .section-heading {
@@ -542,12 +607,18 @@ time,
   }
 
   .home-lede {
+    grid-template-areas:
+      'badge'
+      'intro'
+      'motto'
+      'contact';
     grid-template-columns: 1fr;
   }
 
-  .home-portrait {
-    grid-row: 1;
-    width: 7rem;
+  .identity-badge {
+    justify-self: start;
+    transform: rotate(-1deg);
+    width: 9.5rem;
   }
 
   .home-contact {
