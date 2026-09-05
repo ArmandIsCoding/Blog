@@ -148,8 +148,17 @@ time,
 .home-intro {
   font-size: clamp(1.2rem, 3vw, 1.55rem);
   line-height: 1.48;
-  margin: 0 0 2.8rem;
+  margin: 0;
   max-width: 42rem;
+}
+
+.home-motto {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 2rem auto 2.8rem;
+  max-width: 40rem;
+  text-align: center;
 }
 
 .section-heading {

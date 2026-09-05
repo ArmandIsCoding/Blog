@@ -12,6 +12,10 @@ const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
     Notas sobre software, desarrollo y las cosas que aprendí construyendo sistemas que parecían simples.
   </p>
 
+  <blockquote class="home-motto">
+    <i>“Todo sistema tiende a la entropía; documentar es una forma de rebeldía frente al olvido.”</i>
+  </blockquote>
+
   <section aria-labelledby="ultimos-articulos">
     <h1 id="ultimos-articulos" class="section-heading">Últimos artículos</h1>
     <PostList posts={posts.slice(0, 12)} />
