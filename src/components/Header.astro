@@ -8,11 +8,17 @@ interface Props {
 const { lang = 'es' } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-const links = lang === 'en'
+interface NavLink {
+  href: string;
+  label: string;
+  language?: SiteLanguage;
+}
+
+const links: NavLink[] = lang === 'en'
   ? [
       { href: '/en/', label: 'Articles' },
-      { href: '/', label: 'Español' },
       { href: '/en/feed.xml', label: 'RSS' },
+      { href: '/', label: 'Español', language: 'es' },
     ]
   : [
       { href: '/archivo/', label: 'Archivo' },
@@ -20,6 +26,7 @@ const links = lang === 'en'
       { href: '/proyectos/', label: 'Proyectos' },
       { href: '/acerca/', label: 'Acerca' },
       { href: '/feed.xml', label: 'RSS' },
+      { href: '/en/', label: 'English', language: 'en' },
     ];
 
 function isCurrentPath(href: string): boolean {
@@ -39,6 +46,9 @@ function isCurrentPath(href: string): boolean {
           <li>
             <a
               href={link.href}
+              class:list={{ 'site-nav__language': link.language }}
+              hreflang={link.language}
+              lang={link.language}
               aria-current={isCurrentPath(link.href) ? 'page' : undefined}
             >
               {link.label}

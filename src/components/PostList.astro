@@ -1,7 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import type { Post } from '../lib/posts';
 import type { SiteLanguage } from '../lib/posts';
-import { estimateReadingMinutes, formatPostDate, getPostUrl, slugifyTag } from '../lib/posts';
+import {
+  estimateReadingMinutes,
+  formatPostDate,
+  getPostUrl,
+  isVisiblePost,
+  slugifyTag,
+} from '../lib/posts';
 
 interface Props {
   posts: Post[];
@@ -9,24 +16,48 @@ interface Props {
 }
 
 const { posts, lang = 'es' } = Astro.props;
+const allPosts = (await getCollection('posts')).filter(isVisiblePost);
+
+function getTranslation(post: Post): Post | undefined {
+  if (!post.data.translationKey) return undefined;
+
+  return allPosts.find((candidate) =>
+    candidate.data.translationKey === post.data.translationKey
+    && candidate.data.lang !== post.data.lang
+  );
+}
 ---
 
 <ol class="post-list">
-  {posts.map((post) => (
-    <li class="post-list__item">
-      <time datetime={post.data.publishedAt.toISOString()}>{formatPostDate(post.data.publishedAt, lang)}</time>
-      <div>
-        <h2><a href={getPostUrl(post)}>{post.data.title}</a></h2>
-        <p>{post.data.description}</p>
-        <div class="post-list__meta">
-          {post.data.draft && <span class="draft-label">Draft</span>}
-          {post.data.tags.map((tag) => lang === 'en'
-            ? <span class="post-tag">{tag}</span>
-            : <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
-          )}
-          <span>{estimateReadingMinutes(post.body)} {lang === 'en' ? 'min read' : 'min'}</span>
+  {posts.map((post) => {
+    const translation = getTranslation(post);
+
+    return (
+      <li class="post-list__item">
+        <time datetime={post.data.publishedAt.toISOString()}>{formatPostDate(post.data.publishedAt, lang)}</time>
+        <div>
+          <h2><a href={getPostUrl(post)}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+          <div class="post-list__meta">
+            {post.data.draft && <span class="draft-label">Draft</span>}
+            {translation && (
+              <a
+                class="post-list__translation"
+                href={getPostUrl(translation)}
+                hreflang={translation.data.lang}
+                lang={translation.data.lang}
+              >
+                {translation.data.lang === 'en' ? 'Versión en inglés →' : 'Spanish original →'}
+              </a>
+            )}
+            {post.data.tags.map((tag) => lang === 'en'
+              ? <span class="post-tag">{tag}</span>
+              : <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
+            )}
+            <span>{estimateReadingMinutes(post.body)} {lang === 'en' ? 'min read' : 'min'}</span>
+          </div>
         </div>
-      </div>
-    </li>
-  ))}
+      </li>
+    );
+  })}
 </ol>

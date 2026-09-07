@@ -138,6 +138,17 @@ time,
   color: var(--ink);
 }
 
+.site-nav__language {
+  border: 1px solid var(--rule);
+  color: var(--accent) !important;
+  padding: 0.08rem 0.38rem;
+  text-decoration: none;
+}
+
+.site-nav__language:hover {
+  border-color: var(--accent);
+}
+
 .page-shell {
   margin: 0 auto;
   max-width: 960px;
@@ -452,6 +463,17 @@ time,
 .tag-list span,
 .post-list__meta .post-tag {
   color: var(--accent);
+}
+
+.post-list__meta .post-list__translation {
+  border: 1px solid var(--accent);
+  padding: 0.05rem 0.35rem;
+  text-decoration: none;
+}
+
+.post-list__meta .post-list__translation:hover {
+  background: var(--accent);
+  color: var(--paper);
 }
 
 .draft-label {
