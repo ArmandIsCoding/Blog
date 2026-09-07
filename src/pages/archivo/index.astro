@@ -2,9 +2,13 @@
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import PostList from '../../components/PostList.astro';
-import { isVisiblePost, sortPosts } from '../../lib/posts';
+import { isPostInLanguage, isVisiblePost, sortPosts } from '../../lib/posts';
 
-const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
+const posts = sortPosts(
+  (await getCollection('posts'))
+    .filter(isVisiblePost)
+    .filter((post) => isPostInLanguage(post, 'es')),
+);
 ---
 
 <PageLayout title="Archivo" description="Todos los artículos, del más reciente al más antiguo.">

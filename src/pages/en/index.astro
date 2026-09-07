@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { isPostInLanguage, isVisiblePost, sortPosts } from '../../lib/posts';
+
+const posts = sortPosts(
+  (await getCollection('posts'))
+    .filter(isVisiblePost)
+    .filter((post) => isPostInLanguage(post, 'en')),
+);
+---
+
+<BaseLayout
+  lang="en"
+  title="Articles in English"
+  description="Selected English editions of notes about software, architecture, artificial intelligence, and systems that looked simple."
+  canonicalPath="/en/"
+  alternateLanguagePaths={{ es: '/', en: '/en/' }}
+>
+  <header class="page-heading">
+    <p class="eyebrow">English edition</p>
+    <h1>Articles in English</h1>
+    <p>
+      Selected translations, edited to read naturally rather than processed as documentation payloads.
+      The original blog remains in <a href="/" hreflang="es">Spanish</a>.
+    </p>
+  </header>
+  <PostList posts={posts} lang="en" />
+</BaseLayout>

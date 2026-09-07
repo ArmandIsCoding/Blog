@@ -3,12 +3,19 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import IdentityBadge from '../components/IdentityBadge.astro';
 import PostList from '../components/PostList.astro';
-import { isVisiblePost, sortPosts } from '../lib/posts';
+import { isPostInLanguage, isVisiblePost, sortPosts } from '../lib/posts';
 
-const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
+const posts = sortPosts(
+  (await getCollection('posts'))
+    .filter(isVisiblePost)
+    .filter((post) => isPostInLanguage(post, 'es')),
+);
 ---
 
-<BaseLayout description="Notas sobre software, desarrollo, arquitectura, inteligencia artificial y otros experimentos técnicos.">
+<BaseLayout
+  description="Notas sobre software, desarrollo, arquitectura, inteligencia artificial y otros experimentos técnicos."
+  alternateLanguagePaths={{ es: '/', en: '/en/' }}
+>
   <div class="home-lede">
     <div class="home-copy">
       <p class="home-intro">

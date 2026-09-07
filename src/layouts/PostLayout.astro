@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import IdentityBadge from '../components/IdentityBadge.astro';
 import type { Post } from '../lib/posts';
+import type { SiteLanguage } from '../lib/posts';
 import {
   estimateReadingMinutes,
   formatPostDate,
@@ -17,18 +18,33 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
+const lang = post.data.lang;
+const isEnglish = lang === 'en';
+const allPosts = (await getCollection('posts')).filter(isVisiblePost);
+const posts = sortPosts(allPosts.filter((entry) => entry.data.lang === lang));
+const translation = post.data.translationKey
+  ? allPosts.find((entry) =>
+      entry.data.translationKey === post.data.translationKey && entry.data.lang !== lang)
+  : undefined;
 const currentIndex = posts.findIndex((entry) => entry.id === post.id);
 const newerPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
 const olderPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
 const canonicalPath = getPostUrl(post);
 const image = post.data.cover?.src;
+const alternateLanguagePaths: Partial<Record<SiteLanguage, string>> = {
+  [lang]: canonicalPath,
+};
+
+if (translation) {
+  alternateLanguagePaths[translation.data.lang] = getPostUrl(translation);
+}
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: post.data.title,
   description: post.data.description,
+  inLanguage: isEnglish ? 'en' : 'es-AR',
   datePublished: post.data.publishedAt.toISOString(),
   ...(post.data.updatedAt && { dateModified: post.data.updatedAt.toISOString() }),
   mainEntityOfPage: new URL(canonicalPath, Astro.site).toString(),
@@ -49,28 +65,38 @@ const jsonLd = {
   type="article"
   noindex={post.data.draft}
   jsonLd={jsonLd}
+  lang={lang}
+  alternateLanguagePaths={alternateLanguagePaths}
 >
   <article class="article">
     <header class="article__header">
-      {post.data.draft && <span class="draft-label">Draft: no se publicará</span>}
+      {post.data.draft && (
+        <span class="draft-label">{isEnglish ? 'Draft: it will not be published' : 'Draft: no se publicará'}</span>
+      )}
       <h1>{post.data.title}</h1>
       <p class="article__description">{post.data.description}</p>
       <div class="article__meta">
         <time datetime={post.data.publishedAt.toISOString()}>
-          Publicado el {formatPostDate(post.data.publishedAt)}
+          {isEnglish ? 'Published' : 'Publicado el'} {formatPostDate(post.data.publishedAt, lang)}
         </time>
         {post.data.updatedAt && (
           <time datetime={post.data.updatedAt.toISOString()}>
-            Actualizado el {formatPostDate(post.data.updatedAt)}
+            {isEnglish ? 'Updated' : 'Actualizado el'} {formatPostDate(post.data.updatedAt, lang)}
           </time>
         )}
-        <span>{estimateReadingMinutes(post.body)} min de lectura</span>
+        <span>{estimateReadingMinutes(post.body)} {isEnglish ? 'min read' : 'min de lectura'}</span>
       </div>
-      <div class="tag-list" aria-label="Temas del artículo">
-        {post.data.tags.map((tag) => (
-          <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
-        ))}
+      <div class="tag-list" aria-label={isEnglish ? 'Article topics' : 'Temas del artículo'}>
+        {post.data.tags.map((tag) => isEnglish
+          ? <span>{tag}</span>
+          : <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
+        )}
       </div>
+      {translation && (
+        <a class="article__translation" href={getPostUrl(translation)} hreflang={translation.data.lang}>
+          {translation.data.lang === 'en' ? 'Read in English →' : '← Leer en español'}
+        </a>
+      )}
     </header>
 
     <div class="prose">
@@ -78,15 +104,18 @@ const jsonLd = {
     </div>
 
     <section class="article-author" aria-labelledby="article-author-title">
-      <IdentityBadge compact />
+      <IdentityBadge compact lang={lang} />
       <div class="article-author__copy">
-        <span id="article-author-title">Detrás de estas notas</span>
+        <span id="article-author-title">{isEnglish ? 'Behind these notes' : 'Detrás de estas notas'}</span>
         <p>
-          <strong>Armando Andrés Meabe</strong>. Software, arquitectura y sistemas que parecían simples
-          hasta que dejaron de serlo.
+          {isEnglish ? (
+            <><strong>Armando Andrés Meabe</strong>. Software, architecture, and systems that looked simple until they stopped being so.</>
+          ) : (
+            <><strong>Armando Andrés Meabe</strong>. Software, arquitectura y sistemas que parecían simples hasta que dejaron de serlo.</>
+          )}
         </p>
-        <nav aria-label="Enlaces del autor">
-          <a href="/acerca/">Acerca</a>
+        <nav aria-label={isEnglish ? 'Author links' : 'Enlaces del autor'}>
+          <a href="/acerca/" hreflang="es">{isEnglish ? 'About (ES)' : 'Acerca'}</a>
           <a href="https://github.com/ArmandIsCoding" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/in/armandomeabe/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="/assets/cv-armando-meabe.pdf" download>CV →</a>
@@ -94,11 +123,11 @@ const jsonLd = {
       </div>
     </section>
 
-    <nav class="post-navigation" aria-label="Artículos relacionados por fecha">
+    <nav class="post-navigation" aria-label={isEnglish ? 'Articles by date' : 'Artículos relacionados por fecha'}>
       <div>
         {newerPost && (
           <>
-            <span>Más reciente</span>
+            <span>{isEnglish ? 'Newer' : 'Más reciente'}</span>
             <a href={getPostUrl(newerPost)}>← {newerPost.data.title}</a>
           </>
         )}
@@ -106,7 +135,7 @@ const jsonLd = {
       <div>
         {olderPost && (
           <>
-            <span>Anterior</span>
+            <span>{isEnglish ? 'Older' : 'Anterior'}</span>
             <a href={getPostUrl(olderPost)}>{olderPost.data.title} →</a>
           </>
         )}

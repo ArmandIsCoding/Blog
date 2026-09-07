@@ -1,4 +1,19 @@
+---
+import type { SiteLanguage } from '../lib/posts';
+
+interface Props {
+  lang?: SiteLanguage;
+}
+
+const { lang = 'es' } = Astro.props;
+---
+
 <footer class="site-footer">
   <span>© {new Date().getFullYear()} Armando Andrés Meabe</span>
-  <span>Santa Fe, Argentina · <a href="/feed.xml">Suscribirse por RSS</a></span>
+  <span>
+    Santa Fe, Argentina ·{' '}
+    <a href={lang === 'en' ? '/en/feed.xml' : '/feed.xml'}>
+      {lang === 'en' ? 'Subscribe via RSS' : 'Suscribirse por RSS'}
+    </a>
+  </span>
 </footer>

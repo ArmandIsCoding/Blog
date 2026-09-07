@@ -448,7 +448,9 @@ time,
 }
 
 .post-list__meta a,
-.tag-list a {
+.tag-list a,
+.tag-list span,
+.post-list__meta .post-tag {
   color: var(--accent);
 }
 
@@ -507,6 +509,13 @@ time,
   font-family: var(--mono);
   font-size: 0.68rem;
   margin-top: 0.6rem;
+}
+
+.article__translation {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  margin-top: 0.85rem;
 }
 
 .prose {

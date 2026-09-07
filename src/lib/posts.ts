@@ -1,6 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 
 export type Post = CollectionEntry<'posts'>;
+export type SiteLanguage = 'es' | 'en';
 
 export function isVisiblePost(post: Post): boolean {
   return import.meta.env.DEV || !post.data.draft;
@@ -13,7 +14,11 @@ export function sortPosts(posts: Post[]): Post[] {
 }
 
 export function getPostUrl(post: Post): string {
-  return `/posts/${post.id}/`;
+  return post.data.lang === 'en' ? `/en/posts/${post.id}/` : `/posts/${post.id}/`;
+}
+
+export function isPostInLanguage(post: Post, lang: SiteLanguage): boolean {
+  return post.data.lang === lang;
 }
 
 export function slugifyTag(tag: string): string {
@@ -25,8 +30,8 @@ export function slugifyTag(tag: string): string {
     .replace(/^-|-$/g, '');
 }
 
-export function formatPostDate(date: Date): string {
-  return new Intl.DateTimeFormat('es-AR', {
+export function formatPostDate(date: Date, lang: SiteLanguage = 'es'): string {
+  return new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : 'es-AR', {
     day: '2-digit',
     month: 'short',
     year: 'numeric',

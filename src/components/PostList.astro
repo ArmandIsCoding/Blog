@@ -1,27 +1,30 @@
 ---
 import type { Post } from '../lib/posts';
+import type { SiteLanguage } from '../lib/posts';
 import { estimateReadingMinutes, formatPostDate, getPostUrl, slugifyTag } from '../lib/posts';
 
 interface Props {
   posts: Post[];
+  lang?: SiteLanguage;
 }
 
-const { posts } = Astro.props;
+const { posts, lang = 'es' } = Astro.props;
 ---
 
 <ol class="post-list">
   {posts.map((post) => (
     <li class="post-list__item">
-      <time datetime={post.data.publishedAt.toISOString()}>{formatPostDate(post.data.publishedAt)}</time>
+      <time datetime={post.data.publishedAt.toISOString()}>{formatPostDate(post.data.publishedAt, lang)}</time>
       <div>
         <h2><a href={getPostUrl(post)}>{post.data.title}</a></h2>
         <p>{post.data.description}</p>
         <div class="post-list__meta">
           {post.data.draft && <span class="draft-label">Draft</span>}
-          {post.data.tags.map((tag) => (
-            <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
-          ))}
-          <span>{estimateReadingMinutes(post.body)} min</span>
+          {post.data.tags.map((tag) => lang === 'en'
+            ? <span class="post-tag">{tag}</span>
+            : <a href={`/temas/${slugifyTag(tag)}/`}>{tag}</a>
+          )}
+          <span>{estimateReadingMinutes(post.body)} {lang === 'en' ? 'min read' : 'min'}</span>
         </div>
       </div>
     </li>

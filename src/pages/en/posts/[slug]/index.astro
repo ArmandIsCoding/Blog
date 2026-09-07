@@ -1,13 +1,13 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
-import PostPage from '../../../components/PostPage.astro';
-import { isPostInLanguage, isVisiblePost } from '../../../lib/posts';
+import PostPage from '../../../../components/PostPage.astro';
+import { isPostInLanguage, isVisiblePost } from '../../../../lib/posts';
 
 export const getStaticPaths = (async () => {
   const posts = (await getCollection('posts'))
     .filter(isVisiblePost)
-    .filter((post) => isPostInLanguage(post, 'es'));
+    .filter((post) => isPostInLanguage(post, 'en'));
 
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }) satisfies GetStaticPaths;

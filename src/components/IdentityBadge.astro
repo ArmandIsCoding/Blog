@@ -1,14 +1,15 @@
 ---
 interface Props {
   compact?: boolean;
+  lang?: 'es' | 'en';
 }
 
-const { compact = false } = Astro.props;
+const { compact = false, lang = 'es' } = Astro.props;
 ---
 
 <aside
   class:list={['identity-badge', { 'identity-badge--compact': compact }]}
-  aria-label="Credencial de Armando Andrés Meabe"
+  aria-label={lang === 'en' ? 'Armando Andrés Meabe author badge' : 'Credencial de Armando Andrés Meabe'}
 >
   <span class="identity-badge__slot" aria-hidden="true"></span>
   <span class="identity-badge__site">helloworld.com.ar</span>
@@ -17,11 +18,11 @@ const { compact = false } = Astro.props;
     src="/assets/armand.jpg"
     width="800"
     height="800"
-    alt="Retrato de Armando Andrés Meabe"
+    alt={lang === 'en' ? 'Portrait of Armando Andrés Meabe' : 'Retrato de Armando Andrés Meabe'}
   />
   <div class="identity-badge__name">
     <strong>Armando Andrés Meabe</strong>
-    <span>software · arquitectura · notas</span>
+    <span>{lang === 'en' ? 'software · architecture · notes' : 'software · arquitectura · notas'}</span>
   </div>
   <div class="identity-badge__meta">
     <span>AUTHOR</span>

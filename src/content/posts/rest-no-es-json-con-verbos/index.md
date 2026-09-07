@@ -8,6 +8,8 @@ tags:
   - http
   - rest
   - dotnet
+lang: es
+translationKey: rest-actually-explained
 draft: false
 ---
 

@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { SiteLanguage } from '../lib/posts';
 import '../styles/global.css';
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
   type?: 'website' | 'article';
   noindex?: boolean;
   jsonLd?: Record<string, unknown>;
+  lang?: SiteLanguage;
+  alternateLanguagePaths?: Partial<Record<SiteLanguage, string>>;
 }
 
 const {
@@ -21,16 +24,23 @@ const {
   type = 'website',
   noindex = false,
   jsonLd,
+  lang = 'es',
+  alternateLanguagePaths,
 } = Astro.props;
 
 const siteName = 'helloworld.com.ar';
 const pageTitle = title ? `${title} — ${siteName}` : siteName;
 const canonical = new URL(canonicalPath, Astro.site);
 const socialImage = new URL(image, Astro.site);
+const htmlLang = lang === 'en' ? 'en' : 'es-AR';
+const ogLocale = lang === 'en' ? 'en_US' : 'es_AR';
+const alternateLocale = lang === 'en' ? 'es_AR' : 'en_US';
+const rssPath = lang === 'en' ? '/en/feed.xml' : '/feed.xml';
+const skipLabel = lang === 'en' ? 'Skip to content' : 'Saltar al contenido';
 ---
 
 <!doctype html>
-<html lang="es-AR">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -38,12 +48,25 @@ const socialImage = new URL(image, Astro.site);
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title={siteName} href="/feed.xml" />
+    {alternateLanguagePaths && Object.entries(alternateLanguagePaths).map(([alternateLang, path]) => (
+      <link
+        rel="alternate"
+        hreflang={alternateLang === 'en' ? 'en' : 'es'}
+        href={new URL(path, Astro.site)}
+      />
+    ))}
+    {alternateLanguagePaths?.es && (
+      <link rel="alternate" hreflang="x-default" href={new URL(alternateLanguagePaths.es, Astro.site)} />
+    )}
+    <link rel="alternate" type="application/rss+xml" title={siteName} href={rssPath} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={siteName} />
-    <meta property="og:locale" content="es_AR" />
+    <meta property="og:locale" content={ogLocale} />
+    {alternateLanguagePaths?.[lang === 'en' ? 'es' : 'en'] && (
+      <meta property="og:locale:alternate" content={alternateLocale} />
+    )}
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -59,11 +82,11 @@ const socialImage = new URL(image, Astro.site);
     <title>{pageTitle}</title>
   </head>
   <body>
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
-    <Header />
+    <a class="skip-link" href="#contenido">{skipLabel}</a>
+    <Header lang={lang} />
     <main id="contenido" class="page-shell">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

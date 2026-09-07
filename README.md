@@ -38,6 +38,7 @@ publishedAt: 2026-09-05
 tags:
   - arquitectura
   - dotnet
+lang: es
 draft: true
 ---
 ```
@@ -59,6 +60,25 @@ Un draft versionado en un repositorio público sigue siendo públicamente legibl
 ## URLs de artículos
 
 Todos los artículos se publican como `/posts/<slug>/`, usando el nombre de su carpeta como slug.
+
+### Traducciones
+
+El español es el idioma principal y conserva las URLs `/posts/<slug>/`. Las ediciones en inglés usan
+`/en/posts/<slug>/`. Cada idioma vive en su propio Markdown, con un slug natural, y ambos se relacionan
+mediante la misma `translationKey`:
+
+```yaml
+lang: es
+translationKey: rest-actually-explained
+```
+
+```yaml
+lang: en
+translationKey: rest-actually-explained
+```
+
+El layout genera el enlace entre versiones, `hreflang`, canonical, idioma de OpenGraph y metadata
+estructurada. El listado y RSS en inglés están disponibles en `/en/` y `/en/feed.xml`.
 
 ## Proyectos
 
