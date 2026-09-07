@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import IdentityBadge from '../components/IdentityBadge.astro';
 import PostList from '../components/PostList.astro';
 import { isVisiblePost, sortPosts } from '../lib/posts';
 
@@ -19,25 +20,7 @@ const posts = sortPosts((await getCollection('posts')).filter(isVisiblePost));
       </blockquote>
     </div>
 
-    <aside class="identity-badge" aria-label="Credencial de Armando Andrés Meabe">
-      <span class="identity-badge__slot" aria-hidden="true"></span>
-      <span class="identity-badge__site">helloworld.com.ar</span>
-      <img
-        class="identity-badge__photo"
-        src="/assets/armand.jpg"
-        width="800"
-        height="800"
-        alt="Retrato de Armando Andrés Meabe"
-      />
-      <div class="identity-badge__name">
-        <strong>Armando Andrés Meabe</strong>
-        <span>software · arquitectura · notas</span>
-      </div>
-      <div class="identity-badge__meta">
-        <span>AUTHOR</span>
-        <span>HW-001</span>
-      </div>
-    </aside>
+    <IdentityBadge />
 
     <div class="home-contact" aria-label="Contacto">
       <nav aria-label="Perfiles de Armando">

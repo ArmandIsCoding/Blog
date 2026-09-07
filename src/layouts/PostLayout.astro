@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import IdentityBadge from '../components/IdentityBadge.astro';
 import type { Post } from '../lib/posts';
 import {
   estimateReadingMinutes,
@@ -75,6 +76,23 @@ const jsonLd = {
     <div class="prose">
       <slot />
     </div>
+
+    <section class="article-author" aria-labelledby="article-author-title">
+      <IdentityBadge compact />
+      <div class="article-author__copy">
+        <span id="article-author-title">Detrás de estas notas</span>
+        <p>
+          <strong>Armando Andrés Meabe</strong>. Software, arquitectura y sistemas que parecían simples
+          hasta que dejaron de serlo.
+        </p>
+        <nav aria-label="Enlaces del autor">
+          <a href="/acerca/">Acerca</a>
+          <a href="https://github.com/ArmandIsCoding" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/armandomeabe/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="/assets/cv-armando-meabe.pdf" download>CV →</a>
+        </nav>
+      </div>
+    </section>
 
     <nav class="post-navigation" aria-label="Artículos relacionados por fecha">
       <div>

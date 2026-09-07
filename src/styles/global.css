@@ -281,6 +281,55 @@ time,
   padding: 0.35rem 0.1rem 0;
 }
 
+.identity-badge--compact {
+  display: grid;
+  gap: 0 0.65rem;
+  grid-area: auto;
+  grid-template-areas:
+    'slot slot'
+    'photo site'
+    'photo name'
+    'meta meta';
+  grid-template-columns: 4.7rem minmax(0, 1fr);
+  justify-self: auto;
+  padding: 0.45rem;
+  transform: rotate(0.6deg);
+  width: min(100%, 17rem);
+}
+
+.identity-badge--compact .identity-badge__slot {
+  grid-area: slot;
+  height: 0.26rem;
+  margin-bottom: 0.4rem;
+  width: 2.2rem;
+}
+
+.identity-badge--compact .identity-badge__site {
+  align-self: end;
+  grid-area: site;
+  margin-bottom: 0.25rem;
+}
+
+.identity-badge--compact .identity-badge__photo {
+  align-self: start;
+  grid-area: photo;
+}
+
+.identity-badge--compact .identity-badge__name {
+  align-content: start;
+  grid-area: name;
+  padding: 0;
+}
+
+.identity-badge--compact .identity-badge__name strong {
+  font-size: 0.72rem;
+}
+
+.identity-badge--compact .identity-badge__meta {
+  grid-area: meta;
+  margin-top: 0.4rem;
+}
+
 .section-heading {
   border-bottom: 1px solid var(--rule);
   border-top: 1px solid var(--rule);
@@ -531,6 +580,40 @@ time,
   text-align: center;
 }
 
+.article-author {
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 1.25rem 2rem;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+}
+
+.article-author__copy > span {
+  color: var(--muted);
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+}
+
+.article-author__copy p {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  margin: 0 0 0.65rem;
+}
+
+.article-author__copy nav {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  gap: 0.35rem 0.85rem;
+}
+
 .post-navigation {
   border-top: 1px solid var(--rule);
   display: grid;
@@ -635,8 +718,15 @@ time,
 
   .post-navigation,
   .about-grid,
-  .contact-note {
+  .contact-note,
+  .article-author {
     grid-template-columns: 1fr;
+  }
+
+  .article-author .identity-badge--compact {
+    justify-self: center;
+    transform: rotate(-0.5deg);
+    width: min(100%, 17rem);
   }
 
   .contact-note__cv {
@@ -661,6 +751,7 @@ time,
   .site-nav,
   .site-footer,
   .post-navigation,
+  .article-author,
   .skip-link {
     display: none;
   }

@@ -1,0 +1,30 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<aside
+  class:list={['identity-badge', { 'identity-badge--compact': compact }]}
+  aria-label="Credencial de Armando Andrés Meabe"
+>
+  <span class="identity-badge__slot" aria-hidden="true"></span>
+  <span class="identity-badge__site">helloworld.com.ar</span>
+  <img
+    class="identity-badge__photo"
+    src="/assets/armand.jpg"
+    width="800"
+    height="800"
+    alt="Retrato de Armando Andrés Meabe"
+  />
+  <div class="identity-badge__name">
+    <strong>Armando Andrés Meabe</strong>
+    <span>software · arquitectura · notas</span>
+  </div>
+  <div class="identity-badge__meta">
+    <span>AUTHOR</span>
+    <span>HW-001</span>
+  </div>
+</aside>
